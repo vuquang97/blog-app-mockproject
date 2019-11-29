@@ -1,0 +1,58 @@
+<div class="settings-page">
+    <div class="container page">
+        <div class="row">
+
+            <div class="col-md-6 offset-md-3 col-xs-12">
+                <h1 class="text-xs-center">Your Settings</h1>
+
+                <form [formGroup]="settingForm" (ngSubmit)="updateAccount()" novalidate>
+                    <fieldset>
+                        <fieldset class="form-group">
+                            <input formControlName="image" class="form-control" type="text"
+                                placeholder="URL of profile picture">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input formControlName="userName" class="form-control form-control-lg" type="text"
+                                placeholder="Your Name">
+                            <div class="error-mess"
+                                *ngIf="settingForm['controls'].userName.errors?.onlyCharacter != null
+                                 && (settingForm['controls'].userName.dirty 
+                                 || settingForm['controls'].userName.touched)">
+                                 username can't be blank<br>
+                                 username is too short (minimum is 1 character)
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <textarea formControlName="bio" class="form-control form-control-lg" rows="8"
+                                placeholder="Short bio about you"></textarea>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input formControlName="email" class="form-control form-control-lg" type="text"
+                                placeholder="Email">
+                            <div class="error-mess"
+                                *ngIf="settingForm['controls'].email.errors?.emailValidator != null
+                                 && (settingForm['controls'].email.dirty 
+                                 || settingForm['controls'].email.touched)">
+                                 email can't be blank<br>
+                                 ex: abcdef@gmail.com <br>
+                                 email before '@' must (minimum is 6 character)
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input formControlName="newPassword" class="form-control form-control-lg" type="password"
+                                placeholder="Password">
+                        </fieldset>
+                        <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="settingForm.invalid">
+                            Update Settings
+                        </button>
+                    </fieldset>
+                </form>
+                <hr>
+                <button type="button" class="btn btn-outline-danger" (click)="logout()">
+                    Or click here to logout.
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="article-preview">
+    <div class="article-meta">
+        <a><img class="image" [routerLink]="['/profile', article['author'].username]" [src]="article['author'].image"
+                alt="avata" /></a>
+        <div class="info">
+            <a [routerLink]="['/profile', article['author'].username]"
+                class="author">{{ article['author'].username }}</a>
+            <span class="date">{{ article['createdAt'] | date: 'longDate' }}</span>
+        </div>
+        <button class="btn btn-outline-primary btn-sm pull-xs-right" [ngClass]="isFavorite ? 'active' : ''"
+            (click)="handleFavorite()">
+            <i class="ion-heart"></i> {{ favoritesCount }}
+        </button>
+    </div>
+    <a [routerLink]="['/article', article['slug']]" class="preview-link">
+        <h1>{{ article['title'] }}</h1>
+        <p>{{ article['description'] }}</p>
+        <span>Read more...</span>
+        <ul class="tag-list">
+            <li *ngFor="let el of article['tagList']" class="tag-default tag-pill tag-outline">
+                {{ el }}
+            </li>
+        </ul>
+    </a>
+</div>

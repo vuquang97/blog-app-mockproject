@@ -1,0 +1,58 @@
+<div class="editor-page">
+    <div class="container page">
+        <div class="row">
+
+            <div class="col-md-10 offset-md-1 col-xs-12">
+                <form [formGroup]="articleForm">
+                    <fieldset>
+                        <fieldset class="form-group">
+                            <input formControlName="title" type="text" class="form-control form-control-lg"
+                                placeholder="Article Title">
+                            <div class="error-mess" *ngIf="articleForm['controls'].title.errors?.onlyCharacter != null
+                                && (articleForm['controls'].title.dirty || articleForm['controls'].title.touched)">
+                                    title can't be blank!<br> 
+                                    title is too short (minimum is 1 character)
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input formControlName="description" type="text" class="form-control"
+                                placeholder="What's this article about?">
+                            <div class="error-mess" 
+                                *ngIf="articleForm['controls'].description.errors?.onlyCharacter != null
+                                && (articleForm['controls'].description.dirty 
+                                || articleForm['controls'].description.touched)">
+                                description can't be blank!<br> 
+                                description is too short (minimum is 1 character)
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <textarea formControlName="body" class="form-control" rows="8"
+                                placeholder="Write your article (in markdown)"></textarea>
+                            <div class="error-mess" 
+                                *ngIf="articleForm['controls'].body.errors?.required != null
+                                && (articleForm['controls'].body.dirty 
+                                || articleForm['controls'].body.touched)">
+                                title can't be blank
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input (keyup.enter)="handleEnter($event)" type="text" class="form-control"
+                                placeholder="Enter tags" [disabled]="tagDisable">
+                            <div class="tag-list"></div>
+                        </fieldset>
+                        <div class="tag-list">
+                            <span *ngFor="let el of tagList; let i = index" class="tag-default tag-pill">
+                                <i class="ion-close-round" (click)="deleteTag(i)"></i>
+                                {{ el }}
+                            </span>
+                        </div>
+                        <button (click)="onSubmit()" class="btn btn-lg pull-xs-right btn-primary" type="button" [disabled]="articleForm.invalid">
+                            Publish Article
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

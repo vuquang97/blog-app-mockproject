@@ -1,0 +1,49 @@
+<div class="home-page">
+
+    <div class="banner" *ngIf="!isLogged['logged']">
+        <div class="container">
+            <h1 class="logo-font">conduit</h1>
+            <p>A place to share your knowledge.</p>
+        </div>
+    </div>
+    <div class="container page">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="feed-toggle">
+                    <ul class="nav nav-pills outline-active">
+                        <li class="nav-item feed" *ngIf="isLogged['logged']" (click)="getFeedArticle()">
+                            <a class="nav-link" [ngClass]="switchPage === 0 ? 'active' : ''">Your Feed</a>
+                        </li>
+                        <li class="nav-item feed" (click)="getGlobalArticle()">
+                            <a class="nav-link" [ngClass]="switchPage === 1 ? 'active' : ''">Global Feed</a>
+                        </li>
+                        <li class="nav-item feed" *ngIf="switchPage === 2">
+                            <a class="nav-link active"># {{ tagSelected }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="article-preview" *ngIf="loadPending">
+                        loading articles...
+                </div>
+                <div *ngIf="listArticle?.articles.length > 0 && !loadPending">
+                    <app-article-item *ngFor="let el of listArticle?.articles" [article]="el">
+                    </app-article-item>
+                </div>
+                <div *ngIf="listArticle?.articles.length < 1" class="article-preview">
+                    No articles are here... yet.
+                </div>
+                <div class="article-preview" *ngIf="totalPage.length > 1 && pagiPending">
+                    loading articles...
+                </div>
+                <app-pagination *ngIf="totalPage.length > 1" [totalPage]="totalPage"
+                    (onSelectedPage)="handleSelectPage($event)">
+                </app-pagination>
+            </div>
+
+            <div class="col-md-3">
+                <app-tag (onSelectedTag)="getArticleByTag($event)"></app-tag>
+            </div>
+
+        </div>
+    </div>
+</div>

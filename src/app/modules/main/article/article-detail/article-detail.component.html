@@ -1,0 +1,140 @@
+<div class="article-page">
+
+    <div class="banner">
+        <div class="container">
+
+            <h1>{{ articleDetail?.article.title }}</h1>
+
+            <div class="article-meta">
+                <a [routerLink]="['/profile', articleDetail?.article.author.username]"><img class="avata" [src]="articleDetail?.article.author.image" alt="avata" /></a>
+                <div class="info">
+                    <a [routerLink]="['/profile', articleDetail?.article.author.username]" class="author">{{ articleDetail?.article.author.username }}</a>
+                    <span class="date">{{ articleDetail?.article.createdAt | date: 'longDate' }}</span>
+                </div>
+                <span *ngIf="articleDetail?.article.author.username !== curenUserName">
+                    <button class="btn btn-sm btn-outline-secondary" (click)="handleFollow()">
+                        <i class="ion-plus-round"></i>
+                        &nbsp;
+                        {{ isFollow ? 'Unfollow ' : 'Follow '}}
+
+                        {{  articleDetail?.article.author.username }}
+                    </button>
+                    &nbsp;&nbsp;
+                    <button class="btn btn-sm btn-outline-primary" (click)="handleFavorite()"
+                        [ngClass]="isFavorite ? 'active' : ''">
+                        <i class="ion-heart"></i>
+                        &nbsp;
+                        {{ isFavorite ? 'UnFavorite' : 'Favorite' }} Article <span
+                            class="counter">({{ favoritesCount }})</span>
+                    </button>
+                </span>
+                <span class="ng-scope" *ngIf="articleDetail?.article.author.username === curenUserName">
+                    <a [routerLink]="['/editor', articleDetail.article.slug]" class="btn btn-outline-secondary btn-sm">
+                        <i class="ion-edit"></i> Edit Article
+                    </a>&nbsp;
+                    <button (click)="deleteArticle()" class="btn btn-outline-danger btn-sm">
+                        <i class="ion-trash-a"></i> Delete Article
+                    </button>
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container page">
+
+        <div class="row article-content">
+            <div class="col-md-12">
+                <p>
+                    {{ articleDetail?.article.body }}
+                </p>
+                <ul class="tag-list">
+                    <li *ngFor="let el of articleDetail?.article.tagList" class="tag-default tag-pill tag-outline">
+                        {{ el }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="article-actions">
+            <div class="article-meta">
+                <a [routerLink]="['/profile', articleDetail?.article.author.username]">
+                    <img [src]="articleDetail?.article.author.image" alt="avata" class="comment-author-img" />
+                </a>
+                <div class="info">
+                    <a [routerLink]="['/profile', articleDetail?.article.author.username]" class="author">{{ articleDetail?.article.author.username }}</a>
+                    <span class="date">{{ articleDetail?.article.createdAt | date: 'longDate' }}</span>
+                </div>
+
+                <span *ngIf="articleDetail?.article.author.username !== curenUserName">
+                    <button class="btn btn-sm btn-outline-secondary" (click)="handleFollow()">
+                        <i class="ion-plus-round"></i>
+                        &nbsp;
+                        {{ isFollow ? 'Unfollow ' : 'Follow '}}
+
+                        {{  articleDetail?.article.author.username }}
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-sm btn-outline-primary" (click)="handleFavorite()"
+                        [ngClass]="isFavorite ? 'active' : ''">
+                        <i class="ion-heart"></i>
+                        &nbsp;
+                        {{ isFavorite ? 'UnFavorite' : 'Favorite' }} Article <span
+                            class="counter">({{ favoritesCount }})</span>
+                    </button>
+                </span>
+                <span class="ng-scope" *ngIf="articleDetail?.article.author.username === curenUserName">
+                    <a [routerLink]="['/editor', articleDetail.article.slug]" class="btn btn-outline-secondary btn-sm">
+                        <i class="ion-edit"></i> Edit Article
+                    </a>&nbsp;
+                    <button (click)="deleteArticle()" class="btn btn-outline-danger btn-sm">
+                        <i class="ion-trash-a"></i> Delete Article
+                    </button>
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-md-8 offset-md-2">
+
+                <form [formGroup]="commentValueGroup" (ngSubmit)="addComment()" class="card comment-form">
+                    <div class="card-block">
+                        <textarea class="form-control" formControlName="commentValue" placeholder="Write a comment..."
+                            rows="3">
+                        </textarea>
+                    </div>
+                    <div class="card-footer">
+                        <img [src]="curenUser['image'] || 'https://static.productionready.io/images/smiley-cyrus.jpg'" alt="avata" class="comment-author-img" />
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            Post Comment
+                        </button>
+                    </div>
+                </form>
+
+                <div class="card" *ngFor="let el of listComments">
+                    <div class="card-block">
+                        <p class="card-text">{{ el.body }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="comment-author">
+                            <img [src]="el.author.image" alt="avata" class="comment-author-img" />
+                        </a>
+                        &nbsp;
+                        <a class="comment-author">{{ el.author.username }}</a>
+                        <span class="date-posted">{{ el.createdAt | date: 'longDate' }}</span>
+                        <span class="mod-options" *ngIf="el.author.username === curenUserName">
+                            <i class="ion-trash-a" (click)="deleteConment(el.id)"></i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

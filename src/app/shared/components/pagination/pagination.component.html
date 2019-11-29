@@ -1,0 +1,8 @@
+<nav>
+    <ul class="pagination">
+        <li *ngFor="let el of totalPage; let i = index" class="page-item" (click)="selectedPage(i)"
+            [ngClass]="pageSelected == i ? 'active' : ''">
+            <a class="page-link">{{ i + 1 }}</a>
+        </li>
+    </ul>
+</nav>

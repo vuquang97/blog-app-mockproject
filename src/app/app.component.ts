@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './services/user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'blog-app';
+
+  constructor(
+    private userService: UserService
+  ) {
+    this.userService.isLoggedIn();
+    if(this.userService.isLogged.logged) {
+      this.userService.getCurrentUser().subscribe();
+    }
+  }
 }

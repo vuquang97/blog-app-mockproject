@@ -1,0 +1,37 @@
+.avata {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+ul.tag-list {
+    padding-left: 0px !important;
+    display: inline-block;
+    list-style: none !important;
+}
+
+.article-preview .preview-link ul li {
+    font-weight: 300;
+    font-size: 0.8rem !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.tag-default.tag-outline {
+    border: 1px solid #ddd;
+    color: #aaa !important;
+    background: none !important;
+}
+
+.comment-author-img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.btn-outline-secondary {
+    color: #ccc;
+    background-image: none;
+    background-color: transparent;
+    border-color: #ccc;
+}

@@ -1,0 +1,57 @@
+<div class="auth-page">
+    <div class="container page">
+        <div class="row">
+
+            <div class="col-md-6 offset-md-3 col-xs-12">
+                <h1 class="text-xs-center">Sign up</h1>
+                <p class="text-xs-center">
+                    <a [routerLink]="['/login']">Have an account?</a>
+                </p>
+
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <fieldset class="form-group">
+                        <input
+                            formControlName="userName"
+                            class="form-control form-control-lg" type="text" placeholder="Your Name">
+                        <div class="error-mess"
+                                *ngIf="registerForm['controls'].userName.errors?.onlyCharacter != null
+                                 && (registerForm['controls'].userName.dirty 
+                                 || registerForm['controls'].userName.touched)">
+                                 username can't be blank<br>
+                                 username is too short (minimum is 1 character)
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input
+                            formControlName="email"
+                            class="form-control form-control-lg" type="text" placeholder="Email">
+                        <div class="error-mess"
+                            *ngIf="registerForm['controls'].email.errors?.emailValidator != null
+                             && (registerForm['controls'].email.dirty 
+                             || registerForm['controls'].email.touched)">
+                             email can't be blank<br>
+                             ex: abcdef@gmail.com <br>
+                             email before '@' must (minimum is 6 character)
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input
+                            formControlName="password"
+                            class="form-control form-control-lg" type="password" placeholder="Password">
+                        <div class="error-mess"
+                                *ngIf="registerForm['controls'].password.errors?.onlyCharacter != null
+                                 && (registerForm['controls'].password.dirty 
+                                 || registerForm['controls'].password.touched)">
+                                 password can't be blank<br>
+                                 password is too short (minimum is 1 character)
+                        </div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="registerForm.invalid">
+                        Sign up
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

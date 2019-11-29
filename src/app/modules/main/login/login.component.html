@@ -1,0 +1,46 @@
+<div class="auth-page">
+    <div class="container page">
+        <div class="row">
+
+            <div class="col-md-6 offset-md-3 col-xs-12">
+                <h1 class="text-xs-center">Sign in</h1>
+                <p class="text-xs-center">
+                    <a href="" routerLink="/register">Need an account?</a>
+                </p>
+
+                <form [formGroup]="loginForm" (submit)="onLogin()">
+                    <fieldset>
+                        <div class="error-mess authen-err" *ngIf="checkLogin">
+                           * Email or password is invalid
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control form-control-lg" formControlName="email" type="text"
+                            placeholder="Email">
+                        <div class="error-mess" *ngIf="loginForm['controls'].email.errors?.emailValidator != null
+                             && (loginForm['controls'].email.dirty 
+                             || loginForm['controls'].email.touched)">
+                            email can't be blank<br>
+                            ex: abcdef@gmail.com <br>
+                            email before '@' must (minimum is 6 character)
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control form-control-lg" formControlName="password" type="password"
+                            placeholder="Password">
+                        <div class="error-mess" *ngIf="loginForm['controls'].password.errors?.onlyCharacter != null
+                             && (loginForm['controls'].password.dirty 
+                             || loginForm['controls'].password.touched)">
+                            password can't be blank<br>
+                            password is too short (minimum is 1 character)
+                        </div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="loginForm.invalid">
+                        Sign in
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
