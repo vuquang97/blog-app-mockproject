@@ -1,4 +1,4 @@
-<div class="article-preview">
+<div class="article-preview" [class.un-favorite]="!isFavorite && changeStyle == 'unFavorite'">
     <div class="article-meta">
         <a><img class="image" [routerLink]="['/profile', article['author'].username]" [src]="article['author'].image"
                 alt="avata" /></a>

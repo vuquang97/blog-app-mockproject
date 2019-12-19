@@ -1,3 +1,8 @@
 .image {
     cursor: pointer;
 }
+
+.un-favorite {
+    opacity: 0.5;
+    transition: 1;
+}

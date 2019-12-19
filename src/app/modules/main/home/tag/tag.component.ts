@@ -17,7 +17,11 @@ export class TagComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.articleService.getListTag().subscribe(vl => {
+    // this.articleService.getListTag().subscribe(vl => {
+    //   this.listTag = vl.tags;
+    // });
+
+    this.articleService.getListTag.subscribe(vl => {
       this.listTag = vl.tags;
     })
   }

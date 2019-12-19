@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
 
   listArticle: Articles;
   totalPage = [];
+  changeStyleArticle: string = ''
 
   switchPage: boolean = true;
 
@@ -49,12 +50,14 @@ export class ProfileComponent implements OnInit {
   getMyArticle() {
     this.loadPending = true;
     this.totalPage = [];
+    this.changeStyleArticle = '';
     this.getListArticle('author');
   }
 
   getFavoriteArticle() {
     this.loadPending = true;
     this.totalPage = [];
+    this.changeStyleArticle = 'unFavorite';
     this.getListArticle('favorite');
   }
 

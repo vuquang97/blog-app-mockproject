@@ -19,6 +19,6 @@ export class ArticleResolveService implements Resolve<Article> {
 
     let slug = route.paramMap.get('slug');
 
-    return slug ? this.articleService.getArticle(slug).pipe(take(1)) : EMPTY;
+    return slug ? this.articleService.getArticle(slug) : undefined;
   }
 }

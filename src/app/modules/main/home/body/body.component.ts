@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { ArticleService } from 'src/app/services/article/article.service';
 import { Articles, Tag } from 'src/app/interfaces/config-interface';
+import { LoginService } from 'src/app/services/login/login.service';
 // import {} from '@angular/router';
 
 @Component({
@@ -24,11 +25,16 @@ export class BodyComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
     this.isLogged = this.userService.isLogged;
+
+    this.loginService.isAutoLogin.subscribe(() => {
+      this.switchPage = 1;
+    });
     
     this.isLogged['logged'] ? this.getListArticle('feed', 10, 0) : this.getListArticle('global', 10, 0);
   }

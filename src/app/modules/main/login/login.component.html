@@ -21,8 +21,6 @@
                              && (loginForm['controls'].email.dirty 
                              || loginForm['controls'].email.touched)">
                             email can't be blank<br>
-                            ex: abcdef@gmail.com <br>
-                            email before '@' must (minimum is 6 character)
                         </div>
                     </fieldset>
                     <fieldset class="form-group">
@@ -32,7 +30,6 @@
                              && (loginForm['controls'].password.dirty 
                              || loginForm['controls'].password.touched)">
                             password can't be blank<br>
-                            password is too short (minimum is 1 character)
                         </div>
                     </fieldset>
                     <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="loginForm.invalid">

@@ -11,6 +11,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 export class ArticleItemComponent implements OnInit {
 
   @Input() article: Article;
+  @Input() changeStyle: string = '';
   isFavorite: boolean = false;
   favoritesCount: number = 0;
 

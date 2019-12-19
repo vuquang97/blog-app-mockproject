@@ -50,7 +50,8 @@
                     loading articles...
                 </div>
                 <div *ngIf="listArticle?.articles.length > 0">
-                    <app-article-item *ngFor="let el of listArticle?.articles" [article]="el">
+                    <app-article-item *ngFor="let el of listArticle?.articles" [article]="el"
+                        [changeStyle]="changeStyleArticle">
                     </app-article-item>
                 </div>
                 <div class="article-preview" *ngIf="totalPage.length > 1 && pagiPending">

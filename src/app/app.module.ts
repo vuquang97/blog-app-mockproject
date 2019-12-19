@@ -8,12 +8,14 @@ import { HeaderComponent } from './modules/components/header/header.component';
 import { FooterComponent } from './modules/components/footer/footer.component';
 import { httpInterceptorProviders } from './auth/interceptors';
 import { SharedModule } from './shared/shared.module';
+import { ProgressBarComponent } from './modules/components/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ProgressBarComponent,
   ],
   imports: [
     BrowserModule,

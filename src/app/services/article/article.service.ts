@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ARTICLE, TAG } from 'src/app/constants/api.constants';
 import { Articles, Article, Tag } from 'src/app/interfaces/config-interface';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -47,9 +48,12 @@ export class ArticleService {
     return this.httpClient.get<Articles>(url, { params });
   }
 
-  getListTag(): Observable<Tag> {
-    return this.httpClient.get<Tag>(TAG.getTags);
-  }
+  // getListTag(): Observable<Tag> {
+  //   return this.httpClient.get<Tag>(TAG.getTags);
+  // }
+  getListTag = this.httpClient.get<Tag>(TAG.getTags).pipe(
+    shareReplay()
+  );
 
   addArticle(article: Article):Observable<Article> {
     return this.httpClient.post<Article>(ARTICLE.createArticle, article);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Author, Article } from 'src/app/interfaces/config-interface';
 import { HttpClient } from '@angular/common/http';
 import { ACTION } from 'src/app/constants/api.constants';
@@ -9,9 +9,16 @@ import { ACTION } from 'src/app/constants/api.constants';
 })
 export class ActionService {
 
+  // progressNum: number = 0;
+  showProgress = new Subject();
+
+  progressNum = new Subject<number>();
+
   constructor(
     private httpClient: HttpClient
   ) { }
+
+
 
   followUser(userName: string): Observable<Author> {
     return this.httpClient.post<Author>(ACTION.followUser + `/${userName}/follow`, {});
